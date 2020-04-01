@@ -3,7 +3,7 @@
 # version branch features/node add more words here
 
 
-main():
+def main():
     print("test")
 
 if __name__ == "__main__":
