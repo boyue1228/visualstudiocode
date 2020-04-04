@@ -19,6 +19,7 @@ def main():
         print(i)
     for k in newTest():
         print(k)
+        
 
 if __name__ == "__main__":
     main()
