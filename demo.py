@@ -10,6 +10,7 @@ def createNewGenerator():
     for i in mylist:
         yield i**i
 
+
 # test of lambda, map func in python
 def newTest():
     temperature = [20.9, 30.9, 40.5, 60, 100, 120]
