@@ -1,4 +1,18 @@
 # Readme
+---------------
+
+## python decorator pratice
+
+````
+@decorator
+def func(*args, **kwargs):
+    ...
+
+equivlant to
+def func(*args, **kwargs):
+    ...
+func = decorator(func)    
+````
 
 ## First commit via GIT hub
 
