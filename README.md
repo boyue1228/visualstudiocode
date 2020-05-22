@@ -34,7 +34,7 @@ dkms status
     - pivpn list 
     - pivpn remove
     copy from ˜/configs/<*>.conf to each client
-    autostart
+    ### autostart
     $ sudo systemctl enable wg-quick@wg0.service
     $ sudo systemctl daemon-reload 
     $ sudo systemctl start wg-quick@wg0
