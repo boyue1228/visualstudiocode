@@ -27,28 +27,13 @@ add new map/lambda/yield test
 vlc https://iptv-org.github.io/iptv/index.m3u
 
 
-basecamp@basecamp07:~$ pivpn add
-Enter a Name for the Client: wei
-::: Client Keys generated
-::: Client config generated
-::: Updated server config
-::: WireGuard restarted
-======================================================================
-::: Done! wei.conf successfully created!
-::: wei.conf was copied to /home/basecamp/configs for easy transfer.
-::: Please use this profile only on one device and create additional
-::: profiles for other devices. You can also use pivpn -qr
-::: to generate a QR Code you can scan with the mobile app.
-======================================================================
 
-
-
-Requirements
+#Requirements
 -  Firewall open dst-nat to WireGuard server on UDP port 51820 (Mikortik)
 -  WireGuard Server (10.67.19.200) - no lxc or vm machine.
 -  WireGuard Client (ubuntu) - no lxc or vm machine
 
-Document references:
+#Document references:
 * https://github.com/pivpn/pivpn (server installation)
 * https://www.wireguard.com/install/#ubuntu-1904-module-tools (client installation)
 * https://wiki.archlinux.org/index.php/WireGuard (concept and details, specailly on point-to-site routing paragraph)
@@ -66,8 +51,8 @@ dpkg -s raspberrypi-kernel-headers
 dkms status
 ------------------------
 
-Installation:
-- Server
+#Installation:
+## Server
     interactive way, and following instruction
     - curl -L https://install.pivpn.io | bash
     - pivpn -a -n <client>
@@ -88,7 +73,7 @@ Installation:
     $sudo systemctl reset-failed
 
 
-- Client
+## Client
     - apt install resolvconf
     - mkdir -p /etc/wireguard
     - chown root:root /etc/wireguard
@@ -101,7 +86,7 @@ Installation:
     $ sudo systemctl status wg-quick@wg0
 
 
-- Mikrotik configuration
+## Mikrotik configuration
     IP/Firewall/NAT
     General
     - Chain: dstnat
@@ -165,6 +150,10 @@ Restart NetworkManager
 $ sudo systemctl restart NetworkManager
 
 
+wireguard for proxmox lxc container
+-----------------------------------
+https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/
+-----------------------------------
 
 
 
