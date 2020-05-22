@@ -28,12 +28,12 @@ vlc https://iptv-org.github.io/iptv/index.m3u
 
 
 
-#Requirements
+# Requirements
 -  Firewall open dst-nat to WireGuard server on UDP port 51820 (Mikortik)
 -  WireGuard Server (10.67.19.200) - no lxc or vm machine.
 -  WireGuard Client (ubuntu) - no lxc or vm machine
 
-#Document references:
+# Document references:
 * https://github.com/pivpn/pivpn (server installation)
 * https://www.wireguard.com/install/#ubuntu-1904-module-tools (client installation)
 * https://wiki.archlinux.org/index.php/WireGuard (concept and details, specailly on point-to-site routing paragraph)
@@ -42,6 +42,7 @@ vlc https://iptv-org.github.io/iptv/index.m3u
 * raspberry https://engineerworkshop.com/blog/how-to-set-up-wireguard-on-a-raspberry-pi/#set-up-the-wireguard-client 
 * raspberry client: https://engineerworkshop.com/blog/how-to-set-up-a-wireguard-client-on-linux-with-conf-file/ 
 ------------------------
+````
 if troubles on raspberry client installation, check the following and install kernel-headers
 find /lib/modules -name wireguard.ko
 dpkg -s wireguard-tools
@@ -49,9 +50,10 @@ dpkg -s wireguard-dkms
 dpkg -s raspberrypi-kernel
 dpkg -s raspberrypi-kernel-headers
 dkms status
+````
 ------------------------
 
-#Installation:
+# Installation:
 ## Server
     interactive way, and following instruction
     - curl -L https://install.pivpn.io | bash
@@ -101,14 +103,16 @@ dkms status
     Access to server via tunnel wireguard vpn
     ssh basecamp@10.6.0.1 <wireguard ip>
 
-Useful commands:
+# Useful commands:
 ----------------
+````
 $ wg 
 $ wg showconf <client> (e.g wei)
+````
 
-
-Sample of wireguard server
+# Sample of wireguard server
 --------------------------
+````
 root@basecamp07:/home/basecamp# more /etc/wireguard/wg0.conf 
 [Interface]
 PrivateKey = WC6BHeV66Z+FAZfb0f1AR/bKAkzzr8VSPT/xy27I82g=
@@ -120,9 +124,11 @@ PublicKey = IPHEpZMQ/ZdpOQ/fOzpSN1LJWACH+ezKiBOZDbI7RRs=
 PresharedKey = Oj2qO/oCSGr+o0pVaQJUuGypymo52e9pI51d7JJXEU8=
 AllowedIPs = 10.6.0.2/32
 # end wei
+````
 
-Sample of wireguard client
+# Sample of wireguard client
 --------------------------
+````
 root@osboxes:/home/osboxes# more /etc/wireguard/wei.conf 
 [Interface]
 PrivateKey = cMHtC9s+REjCfMNtUmEHclUxiCQoXijHIlW0/WBKOUs=
@@ -134,12 +140,12 @@ PublicKey = z+d1yFVLf1ttFRlfwCot/HQ6sRq79f3YXpp+8N7kS28=
 PresharedKey = Oj2qO/oCSGr+o0pVaQJUuGypymo52e9pI51d7JJXEU8=
 Endpoint = <ip public>:51820
 AllowedIPs = 0.0.0.0/0, ::0/0
+````
 
-
-Issues with resolvconf and solution
+## Issues with resolvconf and solution
 -----------------------------------
 Disable and stop the systemd-resolved service:
-
+````
 $ sudo systemctl disable systemd-resolved
 $ sudo systemctl stop systemd-resolved
 Then put the following line in the [main] section of your /etc/NetworkManager/NetworkManager.conf:
@@ -149,47 +155,11 @@ $ rm /etc/resolv.conf
 Restart NetworkManager
 $ sudo systemctl restart NetworkManager
 
+````
 
-wireguard for proxmox lxc container
+## wireguard for proxmox lxc container
 -----------------------------------
 https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/
 -----------------------------------
 
-
-
-upop@u1-sportklub-ngs:~$ ip addr show
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet 10.67.225.1/32 scope global lo
-       valid_lft forever preferred_lft forever
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether ec:eb:b8:96:cf:ec brd ff:ff:ff:ff:ff:ff
-    inet 10.67.225.1/27 brd 10.67.225.31 scope global eth0
-       valid_lft forever preferred_lft forever
-3: eth1: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
-    link/ether ec:eb:b8:96:cf:ed brd ff:ff:ff:ff:ff:ff
-4: eth2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether ec:eb:b8:96:cf:ee brd ff:ff:ff:ff:ff:ff
-    inet 192.168.36.83/24 brd 192.168.36.255 scope global eth2
-       valid_lft forever preferred_lft forever
-5: eth3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether ec:eb:b8:96:cf:ef brd ff:ff:ff:ff:ff:ff
-    inet 192.168.64.168/24 brd 192.168.64.255 scope global eth3
-       valid_lft forever preferred_lft forever
-6: tun2: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc htb state UNKNOWN group default qlen 100
-    link/none 
-    inet 10.67.113.38/30 brd 10.67.113.39 scope global tun2
-       valid_lft forever preferred_lft forever
-
-
-    [admin@uk-sportklub] > /ip address print
-Flags: X - disabled, I - invalid, D - dynamic 
- #   ADDRESS            NETWORK         INTERFACE                                                                                                                                                
- 0   ;;; defconf
-     192.168.88.1/24    192.168.88.0    p1                                                                                                                                                       
- 1   10.67.225.30/27    10.67.225.0     br200                                                                                                                                                    
- 2   10.67.232.38/30    10.67.232.36    br2801                                                                                                                                                   
- 3 D 192.168.36.82/24   192.168.36.0    br201                                                                                                                                                    
- 4 D 10.67.234.38/30    10.67.234.36    vpn1                         
+          
