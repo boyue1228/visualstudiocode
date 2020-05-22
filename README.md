@@ -6,7 +6,7 @@ Wireguard
 -  WireGuard Server (10.67.19.200) - no lxc or vm machine.
 -  WireGuard Client (ubuntu) - no lxc or vm machine
 
-# Document references:
+# Document references: 
 * https://github.com/pivpn/pivpn (server installation)
 * https://www.wireguard.com/install/#ubuntu-1904-module-tools (client installation)
 * https://wiki.archlinux.org/index.php/WireGuard (concept and details, specailly on point-to-site routing paragraph)
