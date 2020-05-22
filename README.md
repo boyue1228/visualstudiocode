@@ -159,7 +159,7 @@ $ sudo systemctl restart NetworkManager
 
 ## wireguard for proxmox lxc container
 -----------------------------------
-https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/
+- https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/
 -----------------------------------
 
           
