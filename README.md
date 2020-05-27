@@ -142,3 +142,9 @@ $ sudo systemctl restart NetworkManager
 ## wireguard for proxmox lxc container
 
 1. <https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/>
+
+## Ceph storage 
+
+1. sgdisk -Z /dev/sdb  and repeat for /dev/sdc
+2. ceph fs rm cephfs --yes-i-really-mean-it
+3. go to pools -> destroy cephfs_data nad cephfs_metadata
