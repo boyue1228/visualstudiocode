@@ -143,6 +143,25 @@ $ sudo systemctl restart NetworkManager
 
 1. <https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/>
 
+## install on a old uPOP/ Xenial version
+
+1. add packages with dpkg -i
+```dkms_2.2.0.3-2ubuntu11_all.deb
+libnftnl7_1.0.9-2_amd64.deb
+libreadline7_7.0-3_amd64.deb
+libxtables12_1.6.1-2ubuntu2_amd64.deb
+wireguard-dkms_1.0.20200520-0ppa1~16.04_all.deb
+wireguard-tools_1.0.20200513-1~16.04_amd64.deb
+wireguard_1.0.20200513-1~16.04_all.deb
+```
+2. remove nftables
+$ apt remove nftables
+
+
+
+
+
+
 ## Ceph storage
 
 1. sgdisk -Z /dev/sdb  and repeat for /dev/sdc
