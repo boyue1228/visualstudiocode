@@ -143,8 +143,34 @@ $ sudo systemctl restart NetworkManager
 
 1. <https://nixvsevil.com/posts/wireguard-in-proxmox-lxc/>
 
-## Ceph storage 
+## Ceph storage
 
 1. sgdisk -Z /dev/sdb  and repeat for /dev/sdc
 2. ceph fs rm cephfs --yes-i-really-mean-it
 3. go to pools -> destroy cephfs_data nad cephfs_metadata
+
+there are also points that i would like to see on "howto" / best practices to make a clean network/setup/production design. Security is not only penetration of hacker, but security on what kind of things that we could do to prevent our network/setup when user do error (that happens anyway)
+
+docker run --rm -it --name node-docker \
+-v $PWD:/home/wei/node-docker -w /home/wei/node-docker \
+-e "PORT=3000" -p 8888:3000  \
+-u node node:latest /bin/bash
+
+docker run --rm -it --name node-docker \
+-v $PWD:/home/wei/node-docker -p 8888:3000 \
+node-docker
+
+docker-compose run --rm --service-ports nod_dev_env
+
+
+ "completeHTMLDocument": false,
+    "encodeEmails": true,
+    "ghCodeBlocks": true,
+    "ghCompatibleHeaderId": true,
+    "headerLevelStart": 3,
+    "openLinksInNewWindow": true,
+    "simpleLineBreaks": true,
+    "simplifiedAutoLink": true,
+    "strikethrough": true,
+    "tables": true,
+    "tasklists": true

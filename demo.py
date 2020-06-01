@@ -2,6 +2,8 @@
 
 import time
 import wrapt
+import asyncio
+
 
 # version branch features/node add more words here
 # Test of yield 
@@ -46,6 +48,12 @@ def hello(something,arg1,arg2):
     else:
         print("KO, ",something)
 
+
+async def prnt():
+    print('yep')
+    await asyncio.sleep(1)
+    print('this is good')
+
 def main():
     hello("world",1,"Nein")
 
@@ -64,6 +72,8 @@ def main():
     print(rest)
     print(l)
     '''
+    asyncio.run(prnt())
+
 
 if __name__ == "__main__":
     main()
